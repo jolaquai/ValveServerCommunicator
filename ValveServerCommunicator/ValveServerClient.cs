@@ -98,31 +98,29 @@ public sealed class ValveServerClient : IDisposable
 
         // Now parse and set extra data
         info.ExtraDataFlag = (ExtraDataKind)buf.Read<byte>(ref ptr);
-        switch (info.ExtraDataFlag)
+        if (info.ExtraDataFlag.HasFlag(ExtraDataKind.ExtraSteamAppId))
         {
-            case ExtraDataKind.SteamAppId:
-                var fullValue = buf.Read<long>(ref ptr);
-                // 24-bit mask
-                const long mask = (1 << 24) - 1;
-                info.ExtraDataUnion = new ExtraData(data: fullValue & mask);
-                break;
-            case ExtraDataKind.ServerSteamId:
-                info.ExtraDataUnion = new ExtraData(data: buf.Read<long>(ref ptr));
-                break;
-            case ExtraDataKind.Keywords:
-                info.ExtraDataUnion = new ExtraData(keywords: buf.Read<string>(ref ptr));
-                break;
-            case ExtraDataKind.SourceTVData:
-                info.ExtraDataUnion = new ExtraData(
-                    sourceTvPort: buf.Read<short>(ref ptr),
-                    sourceTvName: buf.Read<string>(ref ptr)
-                );
-                break;
-            case ExtraDataKind.Port:
-                info.ExtraDataUnion = new ExtraData(port: buf.Read<ushort>(ref ptr));
-                break;
-            default:
-                throw new ArgumentException($"Unrecognized extra data flag '0x{(byte)info.ExtraDataFlag:X}'.");
+            var fullValue = buf.Read<long>(ref ptr);
+            // 24-bit mask
+            const long mask = (1 << 24) - 1;
+            info.ExtraSteamAppId = fullValue & mask;
+        }
+        if (info.ExtraDataFlag.HasFlag(ExtraDataKind.ServerSteamId))
+        {
+            info.ServerSteamId = buf.Read<long>(ref ptr);
+        }
+        if (info.ExtraDataFlag.HasFlag(ExtraDataKind.Keywords))
+        {
+            info.Keywords = buf.Read<string>(ref ptr);
+        }
+        if (info.ExtraDataFlag.HasFlag(ExtraDataKind.SourceTVData))
+        {
+            info.SourceTVPort = buf.Read<short>(ref ptr);
+            info.SourceTVName = buf.Read<string>(ref ptr);
+        }
+        if (info.ExtraDataFlag.HasFlag(ExtraDataKind.Port))
+        {
+            info.Port = buf.Read<ushort>(ref ptr);
         }
 
         return info;

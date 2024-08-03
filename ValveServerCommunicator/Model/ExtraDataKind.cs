@@ -3,12 +3,17 @@
 /// <summary>
 /// Specifies the kind of extra data in a Valve game server.
 /// </summary>
+[Flags]
 public enum ExtraDataKind
 {
     /// <summary>
+    /// Specifies that there is no extra data.
+    /// </summary>
+    None = 0x0,
+    /// <summary>
     /// Specifies that the extra data is a Steam AppID.
     /// </summary>
-    SteamAppId = 0x01,
+    ExtraSteamAppId = 0x01,
     /// <summary>
     /// Specifies that the extra data is a server Steam ID.
     /// </summary>
