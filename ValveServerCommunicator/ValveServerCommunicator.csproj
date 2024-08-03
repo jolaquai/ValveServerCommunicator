@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <PackageVersion>1.0.0</PackageVersion>
+    <FileVersion>$(PackageVersion)</FileVersion>
+    <AssemblyVersion>$(FileVersion)</AssemblyVersion>
+    <Version>$(AssemblyVersion)</Version>
+    <DebugType>embedded</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>ValveServerCommunicator</Title>
+    <Authors>Joshua Laquai</Authors>
+    <Description>$(PackageDescription)</Description>
+    <Copyright>(C) Joshua Laquai 20xx</Copyright>
+    <PackageDescription>Allows simple communication with Valve game servers through UPD, abstracting away all the nasty data and challenge request handling.</PackageDescription>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>
+    <PackageProjectUrl>https://github.com/jolaquai/ValveServerCommunicator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jolaquai/ValveServerCommunicator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>
