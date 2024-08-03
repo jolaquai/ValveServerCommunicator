@@ -1,10 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
 
-using ValveServerClient;
-
-using ValveServerCommunicator;
-
 namespace ValveServerCommunicator;
 
 internal static unsafe class Unsafe

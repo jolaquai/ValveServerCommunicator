@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-using ValveServerClient;
-
 namespace ValveServerCommunicator;
 
 internal static class ThrowHelpers

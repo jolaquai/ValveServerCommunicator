@@ -1,7 +1,4 @@
-﻿using ValveServerClient.Model;
-using ValveServerClient;
-
-namespace ValveServerCommunicator.Model;
+﻿namespace ValveServerCommunicator.Model;
 
 /// <summary>
 /// Encapsulates information about a player in a Valve game server.
