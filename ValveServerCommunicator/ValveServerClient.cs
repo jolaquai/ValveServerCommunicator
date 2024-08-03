@@ -51,7 +51,7 @@ public sealed class ValveServerClient : IDisposable
     /// <returns>A <see cref="ServerInfo"/> instance detailing the server's information.</returns>
     public async Task<ServerInfo> QueryInfoAsync()
     {
-        byte[] data = [0xff, 0xff, 0xff, 0xff, 0x54, .. Encoding.ASCII.GetBytes("Source Engine Query"), 0];
+        byte[] data = [0xff, 0xff, 0xff, 0xff, 0x54, .. Unsafe.Encoding.GetBytes("Source Engine Query"), 0];
         var result = await SendImplAsync(data).ConfigureAwait(false);
         // In response to this, we may get the data OR a challenge number
         // If we get a challenge number, we need to send the same data with the challenge number appended to it
@@ -136,7 +136,7 @@ public sealed class ValveServerClient : IDisposable
 
         var buf = await SendImplAsync(a2s_playerData).ConfigureAwait(false);
 
-        nint ptr = 5;
+        nint ptr = 6;
 
         List<Player> players = [];
         while (ptr < buf.Length)
@@ -181,7 +181,8 @@ public sealed class ValveServerClient : IDisposable
     /// This is considered to no longer work for CS:S and TF2 servers.
     /// </summary>
     /// <returns>The latency to the server in milliseconds.</returns>
-    public async Task<long> QueryPingAsync()
+    // never returns
+    private async Task<long> QueryPingAsync()
     {
         byte[] data = [0xff, 0xff, 0xff, 0xff, 0x69];
         var sw = Stopwatch.StartNew();

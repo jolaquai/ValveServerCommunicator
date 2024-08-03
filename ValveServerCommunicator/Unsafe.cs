@@ -5,7 +5,7 @@ namespace ValveServerCommunicator;
 
 internal static unsafe class Unsafe
 {
-    private static readonly Encoding _enc = Encoding.ASCII;
+    public static readonly Encoding Encoding = Encoding.UTF8;
 
     public static byte[] FromAscii(string byteRepr)
     {
@@ -30,7 +30,7 @@ internal static unsafe class Unsafe
         while (bytes[ptr++] != 0) { }
         fixed (byte* p = &bytes[start])
         {
-            return _enc.GetString(p, (int)(ptr - 1 - start));
+            return Encoding.GetString(p, (int)(ptr - 1 - start));
         }
     }
 
